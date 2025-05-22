@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+}
+
+.auth-container, .chat-container {
+  max-width: 650px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.auth-container h2 { margin-top: 0; }
+
+#messages {
+  border: 1px solid #ddd;
+  height: 350px;
+  padding: 10px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+#send-form { display: flex; gap: 5px; }
+
+#msgInput { flex: 1; padding: 8px; }
+
+button, .upload-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover, .upload-btn:hover { background: #0056b3; }
+
+.upload-btn { font-size: 18px; line-height: 1; }
+
+.chat-img {
+  max-width: 200px;
+  max-height: 200px;
+  border: 1px solid #ccc;
+  margin-top: 4px;
+}
+
+.sys { color: #666; font-style: italic; }

@@ -1,0 +1,139 @@
+<style>/* Auth Container */
+.auth-container {
+    max-width: 400px;
+    margin: 5% auto;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.auth-container h2 {
+    color: #2d3748;
+    margin-bottom: 1.8rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Form Elements */
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.auth-container input {
+    padding: 0.9rem 1.2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8fafc;
+}
+
+.auth-container input:focus {
+    outline: none;
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+    background-color: white;
+}
+
+.auth-container input::placeholder {
+    color: #94a3b8;
+}
+
+/* Button */
+.auth-container button {
+    padding: 0.9rem;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.auth-container button:hover {
+    background-color: #3a5a80;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 111, 165, 0.2);
+}
+
+/* Link */
+.auth-container p {
+    color: #64748b;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.auth-container a {
+    color: #4a6fa5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.auth-container a:hover {
+    color: #3a5a80;
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 10% 5%;
+        padding: 1.8rem;
+    }
+    
+    .auth-container h2 {
+        font-size: 1.5rem;
+    }
+    
+    .auth-container input,
+    .auth-container button {
+        padding: 0.8rem;
+    }
+}
+
+/* Floating label effect (optional) */
+.auth-container form {
+    position: relative;
+}
+
+.auth-container input:focus::placeholder {
+    color: transparent;
+}</style>
+
+
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="auth-container">
+  <h2>Register</h2>
+  <form method="POST">
+    <input name="username" placeholder="Username" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Sign Up</button>
+  </form>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+</div>
+{% endblock %}

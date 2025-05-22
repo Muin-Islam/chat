@@ -1,0 +1,159 @@
+<style>
+/* Auth Container */
+.auth-container {
+    max-width: 380px;
+    margin: 8% auto;
+    padding: 2.5rem 2rem;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.auth-container h2 {
+    color: #2d3748;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.auth-container h2:after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, #4a6fa5, #a0b9d9);
+    bottom: -8px;
+    left: 25%;
+    border-radius: 3px;
+}
+
+/* Form Elements */
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.auth-container input {
+    padding: 0.9rem 1.2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8fafc;
+}
+
+.auth-container input:focus {
+    outline: none;
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+    background-color: white;
+}
+
+/* Button */
+.auth-container button {
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #4a6fa5 0%, #6b8cbe 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.auth-container button:hover {
+    background: linear-gradient(135deg, #3a5a80 0%, #5b7cb0 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 111, 165, 0.25);
+}
+
+/* Link */
+.auth-container p {
+    color: #64748b;
+    margin-top: 1.8rem;
+    font-size: 0.95rem;
+}
+
+.auth-container a {
+    color: #4a6fa5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.auth-container a:hover {
+    color: #3a5a80;
+}
+
+.auth-container a:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #4a6fa5;
+    bottom: -2px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.auth-container a:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 15% 5%;
+        padding: 2rem 1.5rem;
+    }
+    
+    .auth-container h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .auth-container input,
+    .auth-container button {
+        padding: 0.85rem;
+    }
+}</style>
+
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="auth-container">
+  <h2>Login</h2>
+  <form method="POST">
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Log In</button>
+  </form>
+  <p>No account? <a href="{{ url_for('register') }}">Register</a></p>
+</div>
+{% endblock %}
