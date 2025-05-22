@@ -13,9 +13,13 @@ from flask_login import (
 from flask_socketio import SocketIO, emit
 from werkzeug.utils import secure_filename
 from config import Config
+from flask_socketio import SocketIO
+import os
 
 # ----------------- App / extensions -----------------
 app = Flask(__name__)
+
+socketio = SocketIO(app, async_mode="eventlet")
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
