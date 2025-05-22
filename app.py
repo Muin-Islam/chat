@@ -19,11 +19,7 @@ import os
 # ----------------- App / extensions -----------------
 app = Flask(__name__)
 socketio = SocketIO(app, async_mode="eventlet", manage_session=False)
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    port = int(os.environ.get("PORT", 10000))
-    socketio.run(app, host="0.0.0.0", port=port)
+
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
@@ -182,3 +178,8 @@ def left_user():
         }, broadcast=True)
 
 # ----------------- Main -----------------
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+    port = int(os.environ.get("PORT", 10000))
+    socketio.run(app, host="0.0.0.0", port=port)
