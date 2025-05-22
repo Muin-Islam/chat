@@ -99,7 +99,7 @@ def login():
             login_user(user)
             return redirect(url_for("chat"))
         flash("Invalid credentials.")
-    return render_template("templates/login.html")
+    return render_template("login.html")
 
 @app.route("/logout")
 @login_required
