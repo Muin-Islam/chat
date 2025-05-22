@@ -18,7 +18,7 @@ import os
 
 # ----------------- App / extensions -----------------
 app = Flask(__name__)
-socketio = SocketIO(app, async_mode="eventlet")
+socketio = SocketIO(app, async_mode="eventlet", manage_session=False)
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Use PORT from Render or default to 5000
     socketio.run(app, host='0.0.0.0', port=port)
@@ -26,7 +26,7 @@ if __name__ == '__main__':
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
-socketio = SocketIO(app, manage_session=False)
+socketio = SocketIO(app, async_mode="eventlet", manage_session=False)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
