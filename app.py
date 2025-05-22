@@ -18,10 +18,11 @@ import os
 
 # ----------------- App / extensions -----------------
 app = Flask(__name__)
+socketio = SocketIO(app, async_mode="eventlet")
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Use PORT from Render or default to 5000
     socketio.run(app, host='0.0.0.0', port=port)
-socketio = SocketIO(app, async_mode="eventlet")
+
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
