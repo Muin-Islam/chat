@@ -19,7 +19,7 @@ import os
 # ----------------- App / extensions -----------------
 app = Flask(__name__)
 socketio = SocketIO(app, async_mode="eventlet", manage_session=False)
-
+eventlet.monkey_patch()
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
