@@ -182,6 +182,16 @@ button, .upload-btn {
         padding: 8px 14px;
     }
 }</style>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+  const socket = io();  // connect to the backend
+
+  // Listen for incoming messages
+  socket.on("new_message", function (data) {
+    // Display new message on the page (implement this part)
+    console.log("New message received", data);
+  });
+</script>
 
 
 {% extends "base.html" %}
