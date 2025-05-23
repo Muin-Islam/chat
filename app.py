@@ -164,7 +164,7 @@ def handle_text(msg):
         "type": "text",
         "username": current_user.username,
         "content": msg
-    }, to='*')
+    }, broadcast=True)
 
 @socketio.on("connect")
 def announce_user():
