@@ -140,7 +140,7 @@ def upload():
         "username": current_user.username,
         "url": url_for("uploaded_file", filename=filename)
     }
-    socketio.emit("new_message", emit_data, to='*')
+    socketio.emit("new_message", emit_data,)
     return jsonify(emit_data), 201
 
 @app.route("/uploads/<filename>")
