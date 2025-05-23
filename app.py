@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 from datetime import datetime
 import os
 from uuid import uuid4
@@ -15,11 +18,11 @@ from werkzeug.utils import secure_filename
 from config import Config
 from flask_socketio import SocketIO
 import os
-import eventlet
+
 # ----------------- App / extensions -----------------
 app = Flask(__name__)
 socketio = SocketIO(app, async_mode="eventlet", manage_session=False)
-eventlet.monkey_patch()
+
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
