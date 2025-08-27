@@ -1,185 +1,466 @@
-<style>/* Chat Container */
+<style>
+
+/* Modern Gradient Background with Animation */
+:root {
+    --primary-color: #6a82fb;
+    --secondary-color: #fc5c7d;
+    --accent-color: #45b7d1;
+    --text-dark: #2d3748;
+    --text-light: #f8fafc;
+    --glass-blur: 16px;
+    --glass-border: 1px solid rgba(255, 255, 255, 0.25);
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+}
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating Particles Effect */
+.particle {
+    position: fixed;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: -1;
+    animation: floatParticle linear infinite;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    color: var(--text-dark);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Animated Gradient Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: linear-gradient(
+        135deg,
+        #ff9a9e 0%,
+        #fad0c4 20%,
+        #fbc2eb 40%,
+        #a6c1ee 60%,
+        #a1c4fd 80%,
+        #c2e9fb 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientFlow 25s ease infinite;
+    z-index: -2;
+    opacity: 0.8;
+}
+
+/* Subtle Noise Texture Overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjIiIHg9IjAiIHk9IjAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');
+    z-index: -1;
+    opacity: 0.4;
+}
+@keyframes floatParticle {
+    to { transform: translateY(-100vh) translateX(20px); }
+}
+
+
+/* Chat Container - Enhanced Glass Effect */
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #f5f7fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    height: 90vh;
+    max-width: 900px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    border-radius: 24px;
+    box-shadow: 
+        0 8px 32px rgba(31, 38, 135, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    border: var(--glass-border);
     overflow: hidden;
-    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: containerEntrance 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.2s;
 }
 
-/* Messages Area */
+/* Messages Area - Dynamic Glass Effect */
 #messages {
     flex: 1;
-    padding: 20px;
+    padding: 25px;
     overflow-y: auto;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    scroll-behavior: smooth;
 }
 
-/* Individual Messages */
+/* Message Bubble Design */
 #messages > div {
-    margin-bottom: 15px;
-    padding: 12px 16px;
-    border-radius: 18px;
-    max-width: 70%;
+    margin-bottom: 16px;
+    padding: 16px 20px;
+    border-radius: 20px;
+    max-width: 75%;
     word-wrap: break-word;
-    line-height: 1.4;
+    line-height: 1.5;
     position: relative;
-    animation: fadeIn 0.3s ease-out;
+    animation: messageIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-sm);
+    border: var(--glass-border);
+    transition: all 0.3s ease;
+    transform-origin: bottom;
 }
 
-/* User Messages (assuming user is the author) */
+/* Hover Effect for Messages */
+#messages > div:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* User Message Highlight */
 #messages > div > strong {
-    color: #4a6fa5;
+    color: var(--primary-color);
     font-weight: 600;
-    margin-right: 5px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
-/* Text Messages */
-#messages > div:not(:has(img)) {
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-/* Image Messages */
+/* Image Message Styling */
 .chat-img {
     max-width: 100%;
     max-height: 300px;
-    border-radius: 12px;
-    margin-top: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e1e5eb;
-    transition: transform 0.2s;
+    border-radius: 16px;
+    margin-top: 12px;
+    box-shadow: var(--shadow-md);
+    border: var(--glass-border);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: zoom-in;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    object-fit: cover;
 }
 
 .chat-img:hover {
-    transform: scale(1.02);
+    transform: scale(1.03) translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Send Form */
+/* Input Area - Floating Glass Panel */
 #send-form {
     display: flex;
-    padding: 15px;
-    background-color: white;
-    border-top: 1px solid #e1e5eb;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-top: var(--glass-border);
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    position: relative;
+    z-index: 10;
 }
 
+/* Modern Input Field */
 #msgInput {
     flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #d1d5db;
+    padding: 16px 24px;
+    border: none;
     border-radius: 24px;
     font-size: 16px;
     outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+}
+
+#msgInput::placeholder {
+    color: rgba(45, 55, 72, 0.5);
 }
 
 #msgInput:focus {
-    border-color: #4a6fa5;
-    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 3px rgba(106, 130, 251, 0.2);
+    transform: translateY(-1px);
 }
 
-/* Buttons */
+/* Button Styles with Micro-interactions */
 button, .upload-btn {
-    padding: 10px 18px;
+    padding: 14px 24px;
     border: none;
     border-radius: 24px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.2s;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
 }
 
+button::after, .upload-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255,255,255,0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+button:hover::after, .upload-btn:hover::after {
+    opacity: 1;
+}
+
+/* Send Button Gradient Animation */
 #sendBtn {
-    background-color: #4a6fa5;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
+    position: relative;
+    z-index: 1;
 }
 
 #sendBtn:hover {
-    background-color: #3a5a80;
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(106, 130, 251, 0.3);
 }
 
+#sendBtn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Upload Button with Icon Transition */
 .upload-btn {
-    background-color: #e1e5eb;
-    color: #4a5568;
-    position: relative;
-    font-size: 18px;
-    width: 40px;
-    height: 40px;
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--primary-color);
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
 }
 
 .upload-btn:hover {
-    background-color: #d1d5db;
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px) rotate(15deg);
+    color: var(--accent-color);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Logout Button */
+/* Logout Button with Warning Color */
 #send-form > a > button {
-    background-color: #f56565;
+    background: linear-gradient(135deg, #ff5e62, #ff9966);
     color: white;
     margin-left: auto;
+    padding: 14px 20px;
 }
 
 #send-form > a > button:hover {
-    background-color: #e53e3e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 94, 98, 0.3);
 }
 
 /* Animations */
-@keyframes fadeIn {
-    from {
+@keyframes containerEntrance {
+    0% {
+        transform: translateY(20px);
         opacity: 0;
-        transform: translateY(10px);
     }
-    to {
-        opacity: 1;
+    100% {
         transform: translateY(0);
+        opacity: 1;
     }
 }
 
-/* Scrollbar Styling */
-#messages::-webkit-scrollbar {
+@keyframes messageIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Message Typing Indicator */
+.typing-indicator {
+    display: inline-block;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    margin-bottom: 16px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.typing-indicator span {
+    height: 8px;
     width: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* Scrollbar Styling - Modern Approach */
+#messages::-webkit-scrollbar {
+    width: 10px;
 }
 
 #messages::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
+    margin: 10px 0;
 }
 
 #messages::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: linear-gradient(var(--primary-color), var(--secondary-color));
     border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 #messages::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1;
+    background: var(--primary-color);
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
+/* Floating Action Effects */
+.floating-action {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Responsive Design with Fluid Typography */
+@media (max-width: 768px) {
     .chat-container {
-        border-radius: 0;
         height: 100vh;
+        margin: 0;
+        border-radius: 0;
+        max-width: 100%;
+    }
+    
+    #messages {
+        padding: 16px;
     }
     
     #messages > div {
-        max-width: 85%;
+        max-width: 90%;
+        padding: 14px 18px;
     }
     
     #send-form {
-        padding: 10px;
+        padding: 12px 16px;
+    }
+    
+    #msgInput {
+        padding: 14px 18px;
     }
     
     button, .upload-btn {
-        padding: 8px 14px;
+        padding: 12px 18px;
+    }
+    
+    .upload-btn {
+        width: 46px;
+        height: 46px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-dark: #f8fafc;
+        --text-light: #1e293b;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    
+    .chat-container {
+        background: rgba(30, 41, 59, 0.5);
+    }
+    
+    #messages {
+        background: linear-gradient(
+            to bottom,
+            rgba(30, 41, 59, 0.4) 0%,
+            rgba(15, 23, 42, 0.3) 100%
+        );
+    }
+    
+    #messages > div {
+        background: rgba(30, 41, 59, 0.7);
+        color: #f8fafc;
+    }
+    
+    #msgInput {
+        background: rgba(30, 41, 59, 0.7);
+        color: #f8fafc;
+    }
+    
+    #msgInput::placeholder {
+        color: rgba(248, 250, 252, 0.5);
+    }
+    
+    .upload-btn {
+        background: rgba(30, 41, 59, 0.7);
+        color: #bc9cff;
     }
 }
 </style>
@@ -201,16 +482,46 @@ button, .upload-btn {
   </div>
 
   <div id="send-form">
-    <input id="msgInput" placeholder="Type a message">
+    <input id="msgInput" placeholder="Type a message...">
     <button id="sendBtn">Send</button>
     <label class="upload-btn">
        📎<input id="fileInput" type="file" accept="image/*" hidden>
     </label>
-   <a href="{{ url_for('logout') }}"><button>Logout</button></a>
-
-
-
+    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
   </div>
 </div>
 <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 {% endblock %}
+
+/* Add this JavaScript at the bottom of your HTML to create particles */
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Create floating particles
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 10 + 5;
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * window.innerHeight;
+        const opacity = Math.random() * 0.4 + 0.2;
+        const duration = Math.random() * 30 + 30;
+        const delay = Math.random() * 10;
+        
+        // Apply styles
+        Object.assign(particle.style, {
+            width: `${size}px`,
+            height: `${size}px`,
+            left: `${posX}px`,
+            top: `${posY}px`,
+            opacity: opacity,
+            animationDuration: `${duration}s`,
+            animationDelay: `${delay}s`
+        });
+        
+        document.body.appendChild(particle);
+    }
+});
+</script>
+
